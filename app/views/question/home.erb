@@ -1,0 +1,10 @@
+<h2><%=@question.title%></h2>
+by <%=@user.name%>
+
+<br>
+<a href="/question/<%=@question.id%>/edit"><button>Edit Your Question</button></a>
+
+<form action="/question/<%=@question.id%>" method="post">
+	<input type="hidden" name="_method" value="delete">
+	<input type="submit" value="Delete Your Questions">
+</form>
