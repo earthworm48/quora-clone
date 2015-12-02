@@ -1,11 +1,11 @@
 
 # Create new user
 post '/users' do
-	user = User.new(name: params[:name], email: params[:email], password: params[:password])
-	if user.save
+	@user = User.new(name: params[:name], email: params[:email], password: params[:password])
+	if @user.save
 		redirect "/users/#{user.id}"
 	else
-		redirect "/"
+		erb :"static/index"
 	end
 end
 

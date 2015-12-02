@@ -11,6 +11,10 @@
 	<input type="submit" value="Sign Up">
 </form>
 
+<div id="error">
+Error:<%=@user.errors.full_messages%>
+</div>
+
 
 <form action="/users/login" method="POST">
 	<label>Email: </label>
