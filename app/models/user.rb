@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 	# :message => "should match confirmation"
 
 	has_many :questions
+	has_many :answers
 	has_secure_password validations: false
 
 end

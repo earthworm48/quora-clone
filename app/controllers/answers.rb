@@ -6,12 +6,7 @@ post '/answers' do
 	redirect "/questions/#{@answer.question_id}"
 end
 
-# question profile page
-get '/answers/:answer_id' do
-	@user = User.find(session[:user_id])
-	@question = Question.find(params[:answer_id])
-	erb :"questions/home"
-end
+
 
 
 

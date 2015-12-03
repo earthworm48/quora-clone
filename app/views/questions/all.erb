@@ -1,16 +1,9 @@
-<h1>All Question</h1>
+<h1>Top Stories</h1>
 
 <%Question.all.each do |question|%>
 	<a href="/questions/<%=question.id%>"><%=question.title%></a><br>
 	by <a href="/users/<%=question.user_id%>"><%=User.find(question.user_id).name%></a><br>
-
-	<%if question.user_id == session[:user_id]%>
-
-		<a href="/questions/<%=question.id%>/edit"><button>Edit Your Question</button></a>
-
-		<form action="/questions/<%=question.id%>" method="post">
-			<input type="hidden" name="_method" value="delete">
-			<input type="submit" value="Delete Your Questions">
-		</form>	
+	<%if Answer.find_by(question_id: question.id) != nil%>
+		<%=Answer.find_by(question_id: question.id).content%><br>
 	<%end%>
 <%end%>

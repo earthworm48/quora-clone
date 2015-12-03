@@ -1,0 +1,8 @@
+<h1><%= @user.name%> Question List</h1>
+
+<br>
+
+<% @user.questions.each do |question|%>
+
+	<a href="/questions/<%=question.id%>"><%=question.title%></a><br>
+<%end%>

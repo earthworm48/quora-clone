@@ -45,6 +45,18 @@ get '/users/:id/edit' do
 	erb :"users/edit"
 end
 
+#  User Question List
+get '/users/:id/question' do
+	@user = User.find(params[:id])
+	erb :"users/question"
+end
+
+#  User Answer List
+get '/users/:id/answer' do
+	@user = User.find(params[:id])
+	erb :"users/answer"
+end
+
 # Update user
 patch "/users/:id" do
 	user = User.find(params[:id])

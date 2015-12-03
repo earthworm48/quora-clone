@@ -1,5 +1,10 @@
 <h1>User Profile</h1>
 
+<nav>
+<a href="/users/<%=@user.id%>/question">My Question</a> | 
+<a href="/users/<%=@user.id%>/answer">My Answer	</a>
+</nav>
+
 Name: <%= @user.name%><br>
 Email: <%= @user.email%><br>
 Description: <%= @user.description%><br>
@@ -18,10 +23,17 @@ Description: <%= @user.description%><br>
 
 
 
-<h3>Question List:</h3><br>
+<h3><%= @user.name%> asked this:</h3><br>
 
 <% @user.questions.each do |question|%>
 
 	<a href="/questions/<%=question.id%>"><%=question.title%></a><br>
 <%end%>
 
+<h3><%= @user.name%> answer this:</h3><br>
+
+<% @user.answers.each do |answer|%>
+
+	<a href="/questions/<%=answer.question_id%>"><%=Question.find(answer.question_id).title%></a><br>
+	<%=answer.content%>
+<%end%>
