@@ -1,11 +1,14 @@
-<h2><%=@question.title%></h2>
-by <a href="/users/<%=@user.id%>"><%=User.find(@question.user_id).name%></a>
+	
+	<h2><%=@question.title%></h2>	
+	by <a href="/users/<%=@user.id%>"><%=User.find(@question.user_id).name%></a>
 
-<br>
+	<br>
 
-<%Answer.where(question_id: @question.id).each do |answer|%>
-	<%=answer.content%><br>
-<%end%>
+	<div class="post">
+		<%Answer.where(question_id: @question.id).each do |answer|%>
+			<%=answer.content%><br>
+		<%end%>
+	</div>
 
 <br><br>
 <%if @question.user_id == session[:user_id]%>

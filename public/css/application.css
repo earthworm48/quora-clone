@@ -1,7 +1,16 @@
-.post {
-	border-bottom:1px dotted #000000;
+#logo{
+	color: red;
+	font: Helvetica;
+}
+
+.post_all {
+	border-top:1px dotted #000000;
 	width: 70%;
 	margin: auto;
+}
+
+.post {
+	border-top:1px dotted #000000;
 }
 
 .top_stories {

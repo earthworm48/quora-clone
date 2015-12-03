@@ -3,7 +3,7 @@
 </div>
 
 	<%Question.all.each do |question|%>
-		<div class="post">
+		<div class="post_all">
 			<h2><a href="/questions/<%=question.id%>"><%=question.title%></a></h2><br>
 
 			by <a href="/users/<%=question.user_id%>"><%=User.find(question.user_id).name%></a><br>
