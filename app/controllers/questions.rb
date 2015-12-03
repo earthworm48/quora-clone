@@ -1,7 +1,7 @@
 
 # Create new question page
 get '/questions/new' do
-	erb :"question/form"
+	erb :"questions/form"
 end
 
 post '/questions' do
@@ -13,13 +13,13 @@ end
 get '/question/:question_id' do
 	@user = User.find(session[:user_id])
 	@question = Question.find(params[:question_id])
-	erb :"question/home"
+	erb :"questions/home"
 end
 
 # Edit question
 get '/question/:question_id/edit' do
 	@question = Question.find(params[:question_id])
-	erb :"question/edit"
+	erb :"questions/edit"
 end
 
 # Update user
@@ -32,5 +32,5 @@ end
 delete "/question/:id" do
 	question = Question.find(params[:id])
 	question.destroy
-	redirect "/"	
+	redirect 	
 end

@@ -1,4 +1,16 @@
+<div class="hide_bar"></div>
 <h1> Welcome to Quora Clone!</h1>
+
+<%= @error if @error %>
+
+<% if @user.errors.any?%>
+	<div class="Signup_Errors">
+	<% for message_error in @user.errors.full_messages %>
+		<p><%=message_error %> </p>
+	<%end%>
+	</div>
+<%end%>
+
 
 <h2>SIGN UP</h2>
 <form action="/users" method="POST">
@@ -11,13 +23,6 @@
 	<input type="submit" value="Sign Up">
 </form>
 
-<% if @user.errors.any?%>
-	<div class="Signup_Errors">
-	<% for message_error in @user.errors.full_messages %>
-		<p><%=message_error %> </p>
-	<%end%>
-	</div>
-<%end%>
 
 <h2>LOG IN</h2>
 <form action="/users/login" method="POST">
@@ -28,4 +33,4 @@
 	<input type="submit" value="Log In">
 </form>
 
-<%=@error%>
+

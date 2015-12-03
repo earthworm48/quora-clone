@@ -1,5 +1,3 @@
-require 'byebug'
-require 'bcrypt'
 # Create new user
 post '/users' do
 	# encrypted_password = BCrypt::Password.create(params[:password])
@@ -30,14 +28,19 @@ end
 
 # user profile page
 get '/users/:id' do
-	@user = User.find(params[:id])
-	erb :"user/home"
+@user = User.find(params[:id])
+	if session[:user_id]
+		erb :"users/home"
+	else
+		 @error = "Please Log In"
+	  	redirect "/?error_msg=#{@error}"
+	end
 end
 
 # Edit user
 get '/users/:id/edit' do
 	@user = User.find(params[:id])
-	erb :"user/edit"
+	erb :"users/edit"
 end
 
 # Update user
@@ -51,4 +54,10 @@ delete "/users/:id" do
 	user = User.find(params[:id])
 	user.destroy
 	redirect "/"	
+end
+
+# Log out users
+get "/users/:id/logout" do
+	session[:user_id] = nil
+	redirect "/"
 end
