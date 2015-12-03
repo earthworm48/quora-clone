@@ -22,18 +22,22 @@ Description: <%= @user.description%><br>
 
 
 
+<% if @user.questions != nil%>
+	<h3><%= @user.name%> asked this:</h3><br>
 
-<h3><%= @user.name%> asked this:</h3><br>
+	<% @user.questions.each do |question|%>
 
-<% @user.questions.each do |question|%>
-
-	<a href="/questions/<%=question.id%>"><%=question.title%></a><br>
+		<a href="/questions/<%=question.id%>"><%=question.title%></a><br>
+	<%end%>
 <%end%>
 
-<h3><%= @user.name%> answer this:</h3><br>
 
-<% @user.answers.each do |answer|%>
+<% if @user.answers != nil%>
+	<h3><%= @user.name%> answer this:</h3><br>
 
-	<a href="/questions/<%=answer.question_id%>"><%=Question.find(answer.question_id).title%></a><br>
-	<%=answer.content%>
+	<% @user.answers.each do |answer|%>
+
+		<a href="/questions/<%=answer.question_id%>"><%=Question.find(answer.question_id).title%></a><br>
+		<%=answer.content%>
+	<%end%>
 <%end%>
