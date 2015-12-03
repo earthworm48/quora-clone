@@ -1,40 +1,46 @@
-<center>
-<h1 id="logo"> Quora </h1>
-<h3>The best answer to any question</h3>
+<body id="log_in_page">
+	<center>
+	<h1 id="logo"> Quora </h1>
+	<h3>The best answer to any question</h3>
 
-<%= @error if @error %>
+	<%= @error if @error %>
 
-<% if @user.errors.any?%>
-	<div class="Signup_Errors">
-	<% for message_error in @user.errors.full_messages %>
-		<p><%=message_error %> </p>
+	<% if @user.errors.any?%>
+		<div class="Signup_Errors">
+		<% for message_error in @user.errors.full_messages %>
+			<p><%=message_error %> </p>
+		<%end%>
+		</div>
 	<%end%>
+	</center>
+
+	<div id="wrap">
+		<div class="left_col">
+			<h2>SIGN UP</h2>
+			<form action="/users" method="POST">
+				<label>Name: </label><br>
+				<input type="text" name="name" required><br>
+				<label>Email: </label><br>
+				<input type="text" name="email" required><br>
+				<label>Password (minimum 8): </label><br>
+				<input type="password" name="password" required><br>
+				<label>Confirmation Your Password: </label><br>
+				<input type="password" name="password_confirmation" required><br>
+				<input type="submit" value="Sign Up">
+			</form>
+		</div>
+
+		<div class="right_col">
+			<h2>LOG IN</h2>
+			<form action="/users/login" method="POST">
+				<label>Email: </label><br>
+				<input type="text" name="email"><br>
+				<label>Password: </label><br>
+				<input type="password" name="password"><br>
+				<input type="submit" value="Log In">
+			</form>
+		</div>
 	</div>
-<%end%>
-
-
-<h2>SIGN UP</h2>
-<form action="/users" method="POST">
-	<label>Name: </label><br>
-	<input type="text" name="name" required><br>
-	<label>Email: </label><br>
-	<input type="text" name="email" required><br>
-	<label>Password (minimum 8): </label><br>
-	<input type="password" name="password" required><br>
-	<label>COnfirmation Your Password: </label><br>
-	<input type="password" name="password_confirmation" required><br>
-	<input type="submit" value="Sign Up">
-</form>
-
-
-<h2>LOG IN</h2>
-<form action="/users/login" method="POST">
-	<label>Email: </label><br>
-	<input type="text" name="email"><br>
-	<label>Password: </label><br>
-	<input type="password" name="password"><br>
-	<input type="submit" value="Log In">
-</form>
-</center>
+</body>
 
 
