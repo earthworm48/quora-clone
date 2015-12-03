@@ -11,9 +11,13 @@
 	<input type="submit" value="Sign Up">
 </form>
 
-<div id="error">
-Error:<%=@user.errors.full_messages%>
-</div>
+<% if @user.errors.any?%>
+	<ul class="Signup_Errors">
+	<% for message_error in @user.errors.full_messages %>
+		<li>* <%message_error %> </li>
+	<%end%>
+	</ul>
+<%end%>
 
 <h2>LOG IN</h2>
 <form action="/users/login" method="POST">
@@ -24,3 +28,4 @@ Error:<%=@user.errors.full_messages%>
 	<input type="submit" value="Log In">
 </form>
 
+<%=@error%>
