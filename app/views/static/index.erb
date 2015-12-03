@@ -12,11 +12,11 @@
 </form>
 
 <% if @user.errors.any?%>
-	<ul class="Signup_Errors">
+	<div class="Signup_Errors">
 	<% for message_error in @user.errors.full_messages %>
-		<li>* <%message_error %> </li>
+		<p><%=message_error %> </p>
 	<%end%>
-	</ul>
+	</div>
 <%end%>
 
 <h2>LOG IN</h2>
