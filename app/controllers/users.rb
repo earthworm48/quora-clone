@@ -15,20 +15,20 @@ post '/users/login' do
 	@user = User.find_by(email: params[:email]) 
 	# byebug
 	if @user.nil?
-		# @error = "No such user exist! Please register!"
-		erb :"static/error"
+		@error = "No such email address"
+		redirect "/?error_msg=#{@error}"
 	elsif @user.authenticate(params[:password])	
 		session[:user_id] = @user.id
 		redirect "/users/#{@user.id}"
 	else
 		@error = "Wrong combination of e-mail and password"
-		erb :"static/index"
+		redirect "/?error_msg=#{@error}"
 	end
 end
 
 # user profile page
 get '/users/:id' do
-@user = User.find(params[:id])
+@user = User.find(session[:user_id])
 	if session[:user_id]
 		erb :"users/home"
 	else

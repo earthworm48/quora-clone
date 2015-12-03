@@ -14,3 +14,10 @@ Description: <%= @user.description%><br>
 <a href="/questions/new"><button>Post a new questions!</button></a>
 
 
+<h3>Question List:</h3><br>
+
+<% @user.questions.each do |question|%>
+
+	<a href="/questions/<%=question.id%>"><%=question.title%></a><br>
+<%end%>
+

@@ -5,32 +5,33 @@ get '/questions/new' do
 end
 
 post '/questions' do
-	@question = Question.create(title: params[:title])	
-	redirect "/question/#{@question.id}"
+	@question = Question.create(title: params[:title],user_id: session[:user_id])	
+	redirect "/questions/#{@question.id}"
 end
 
 # question profile page
-get '/question/:question_id' do
+get '/questions/:question_id' do
 	@user = User.find(session[:user_id])
 	@question = Question.find(params[:question_id])
 	erb :"questions/home"
 end
 
 # Edit question
-get '/question/:question_id/edit' do
+get '/questions/:question_id/edit' do
 	@question = Question.find(params[:question_id])
 	erb :"questions/edit"
 end
 
-# Update user
-patch "/question/:question_id" do
+# Update question
+patch "/questions/:question_id" do
 	question = Question.find(params[:question_id])
 	question.update(title: params[:title])
-	redirect "/question/#{question.id}"
+	redirect "/questions/#{question.id}"
 end
 
-delete "/question/:id" do
-	question = Question.find(params[:id])
+delete "/questions/:question_id" do
+	question = Question.find(params[:question_id])
+	# byebug
 	question.destroy
-	redirect 	
+	redirect "/users/#{session[:user_id]}" 	
 end
