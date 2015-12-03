@@ -2,8 +2,9 @@
 post '/users' do
 	# encrypted_password = BCrypt::Password.create(params[:password])
 	# byebug
-	@user = User.new(name: params[:name], email: params[:email], password: params[:password])
+	@user = User.new(name: params[:name], email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation])
 	if @user.save
+		session[:user_id] = @user.id
 		redirect "/users/#{@user.id}"
 	else
 		erb :"static/index"
@@ -28,6 +29,7 @@ end
 
 # user profile page
 get '/users/:id' do
+	# byebug
 @user = User.find(session[:user_id])
 	if session[:user_id]
 		erb :"users/home"
