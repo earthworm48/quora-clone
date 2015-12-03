@@ -3,6 +3,11 @@ by <a href="/users/<%=@user.id%>"><%=User.find(@question.user_id).name%></a>
 
 <br>
 
+<%Answer.where(question_id: @question.id).each do |answer|%>
+	<%=answer.content%><br>
+<%end%>
+
+<br><br>
 <%if @question.user_id == session[:user_id]%>
 
 	<a href="/questions/<%=@question.id%>/edit"><button>Edit Your Question</button></a>
@@ -11,11 +16,13 @@ by <a href="/users/<%=@user.id%>"><%=User.find(@question.user_id).name%></a>
 		<input type="hidden" name="_method" value="delete">
 		<input type="submit" value="Delete Your Questions">
 	</form>
+
 <%else%>
 
 	<form action="/answers" method="POST">
 		<label>Answer The Questions </label><br>
 		<textarea name="content"></textarea><br>
+		<input type="hidden" name="question_id" value= <%=@question.id%> >
 		<input type="submit" value="Post Your Answer!">
 	</form>
 

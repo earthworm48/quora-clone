@@ -1,20 +1,20 @@
 
-# Create new question page
-get '/answers/new' do
-	erb :"answers/form"
-end
 
 post '/answers' do
-	@question = Question.create(title: params[:title],user_id: session[:user_id])	
-	redirect "/answers/#{@question.id}"
+	@answer = Answer.create(content: params[:content],user_id: session[:user_id],question_id: params[:question_id])	
+	# byebug
+	redirect "/questions/#{@answer.question_id}"
 end
 
 # question profile page
 get '/answers/:answer_id' do
 	@user = User.find(session[:user_id])
 	@question = Question.find(params[:answer_id])
-	erb :"answers/home"
+	erb :"questions/home"
 end
+
+
+
 
 get '/answers' do
 	erb :"answers/all"
