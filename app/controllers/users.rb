@@ -30,7 +30,7 @@ end
 # user profile page
 get '/users/:id' do
 	# byebug
-@user = User.find(session[:user_id])
+@user = User.find(params[:id])
 	if session[:user_id]
 		erb :"users/home"
 	else

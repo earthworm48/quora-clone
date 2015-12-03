@@ -16,6 +16,11 @@ get '/questions/:question_id' do
 	erb :"questions/home"
 end
 
+get '/questions' do
+	erb :"questions/all"
+end
+
+
 # Edit question
 get '/questions/:question_id/edit' do
 	@question = Question.find(params[:question_id])
