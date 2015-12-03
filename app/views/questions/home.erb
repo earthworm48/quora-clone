@@ -11,5 +11,13 @@ by <a href="/users/<%=@user.id%>"><%=User.find(@question.user_id).name%></a>
 		<input type="hidden" name="_method" value="delete">
 		<input type="submit" value="Delete Your Questions">
 	</form>
+<%else%>
+
+	<form action="/answers" method="POST">
+		<label>Answer The Questions </label><br>
+		<textarea name="content"></textarea><br>
+		<input type="submit" value="Post Your Answer!">
+	</form>
 
 <%end%>
+
