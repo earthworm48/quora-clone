@@ -1,3 +1,10 @@
+#menu{
+	float: right;
+}
+
+#user_control{
+	float: left;
+}
 #logo{
 	color: red;
 	font: Helvetica;
@@ -6,28 +13,43 @@
 #log_in_page{
 	background-image:url("/img/background.jpg");
 }
-/*
-.floating_box{
-	display: inline-block;
-	float: left;
-	width: 30%;
-	margin: auto;
-	text-align: left;
-}*/
 
 #wrap {
-   width:400px;
-   margin:0 auto;
+	display: table;
+	text-align: left;
 }
 
 #left_col {
-   float:left;
-   width:200px;
+	display:table-cell;
+
 }
 
 #right_col {
-   float:right;
-   width:200px;
+	display:table-cell;
+}
+
+#error{
+	color: red;
+	font: sans-serif;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+#user_control{
+	width:100%;
+	text-align: left;
+}
+.user_button{
+	display: inline-block;
+	float:left;
+}
+
+
+
+.line-separator{
+	height:1px;
+	background:#717171;
+	border-bottom:1px solid #313030;
 }
 
 .post_all {
@@ -38,6 +60,11 @@
 
 .post {
 	border-top:1px dotted #000000;
+}
+
+.profile_post{
+	font-size: 20px;
+	font-weight: bold;
 }
 
 .top_stories {

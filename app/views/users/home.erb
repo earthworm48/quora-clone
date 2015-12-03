@@ -1,43 +1,49 @@
-<h1>User Profile</h1>
+<h1><%=@user.name%></h1>
 
 <nav>
 <a href="/users/<%=@user.id%>/question">My Question</a> | 
 <a href="/users/<%=@user.id%>/answer">My Answer	</a>
 </nav>
 
-Name: <%= @user.name%><br>
 Email: <%= @user.email%><br>
 Description: <%= @user.description%><br>
 
+<div id="user_control">
 <%if session[:user_id] == @user.id%>
-	<a href="/users/<%=@user.id%>/edit"><button>Edit</button></a>
+	<a href="/users/<%=@user.id%>/edit"><button class="user_button">Edit</button></a>
 
 	<form action="/users/<%=@user.id%>" method="post">
 		<input type="hidden" name="_method" value="delete">
-		<input type="submit" value="delete">
+		<input class="user_button" type="submit" value="Delete">
 	</form>
 
-	<a href="/questions/new"><button>Post a new questions!</button></a>
+	<a href="/questions/new"><button class="user_button">Post a new questions!</button></a>
 <%end%>
+</div>
 
+<div class="line-separator"></div>
 
-
-<% if @user.questions != nil%>
-	<h3><%= @user.name%> asked this:</h3><br>
+<% if @user.questions.any?%>
+	<h3><%= @user.name%> asked this:</h3>
 
 	<% @user.questions.each do |question|%>
-
-		<a href="/questions/<%=question.id%>"><%=question.title%></a><br>
+		<a class="profile_post" href="/questions/<%=question.id%>"><%=question.title%></a><br>
+		<%if Answer.find_by(question_id: question.id) != nil %>
+			<%=Answer.find_by(question_id: question.id).content%>
+		<%end%>
 	<%end%>
+<%else%>
+	No question have been asked !
 <%end%>
 
-
-<% if @user.answers != nil%>
+<% if @user.answers.any?%>
 	<h3><%= @user.name%> answer this:</h3><br>
 
 	<% @user.answers.each do |answer|%>
 
-		<a href="/questions/<%=answer.question_id%>"><%=Question.find(answer.question_id).title%></a><br>
-		<%=answer.content%>
+		<a class="profile_post" href="/questions/<%=answer.question_id%>"><%=Question.find(answer.question_id).title%></a><br>
+		<%=answer.content%><br>
 	<%end%>
+<%else%>
+	<p>No question have been answered!</p>
 <%end%>

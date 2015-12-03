@@ -3,17 +3,20 @@
 	<h1 id="logo"> Quora </h1>
 	<h3>The best answer to any question</h3>
 
-	<%= @error if @error %>
+	<div id="error">
+		<%= @error if @error %>
 
-	<% if @user.errors.any?%>
-		<div class="Signup_Errors">
-		<% for message_error in @user.errors.full_messages %>
-			<p><%=message_error %> </p>
+		<% if @user.errors.any?%>
+			<div class="Signup_Errors">
+			<% for message_error in @user.errors.full_messages %>
+				<p><%=message_error %> </p>
+			<%end%>
+			</div>
 		<%end%>
 		</div>
-	<%end%>
 	</center>
-
+	
+	<center>
 	<div id="wrap">
 		<div class="left_col">
 			<h2>SIGN UP</h2>
@@ -41,6 +44,7 @@
 			</form>
 		</div>
 	</div>
+	</center>
 </body>
 
 
