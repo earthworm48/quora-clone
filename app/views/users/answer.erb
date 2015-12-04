@@ -5,4 +5,10 @@
 <% @user.answers.each do |answer|%>
 	<a href="/questions/<%=answer.question_id%>"><%=Question.find(answer.question_id).title%></a><br>
 	<%=answer.content%>
+	<a href="/questions/<%=@question.id%>/edit"><button>Edit Your Answer</button></a>
+
+	<form action="/questions/<%=@question.id%>" method="post">
+		<input type="hidden" name="_method" value="delete">
+		<input type="submit" value="Delete Your Answer">
+	</form>
 <%end%>

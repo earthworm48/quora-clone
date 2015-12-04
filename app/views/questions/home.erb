@@ -32,9 +32,9 @@
 
 		<%if answer.user_id.to_i == current_user.id%>
 
-			<a href="/questions/<%=@question.id%>/edit"><button>Edit Your Answer</button></a>
+			<a href="/answers/<%=answer.id%>/edit"><button>Edit Your Answer</button></a>
 
-			<form action="/questions/<%=@question.id%>" method="post">
+			<form action="/answers/<%=answer.id%>" method="post">
 				<input type="hidden" name="_method" value="delete">
 				<input type="submit" value="Delete Your Answer">
 			</form>

@@ -7,8 +7,9 @@
 			<h2><a href="/questions/<%=question.id%>"><%=question.title%></a></h2><br>
 
 			by <a href="/users/<%=question.user_id%>"><%=User.find(question.user_id).name%></a><br>
-			<%if Answer.find_by(question_id: question.id) != nil%>
+			<%if Answer.find_by(question_id: question.id)%>
 				<%=Answer.find_by(question_id: question.id).content%><br>
+				
 			<%end%>
 		</div>
 	<%end%>
