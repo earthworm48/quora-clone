@@ -2,6 +2,18 @@
 	<h2><%=@question.title%></h2>	
 	by <a href="/users/<%=@user.id%>"><%=User.find(@question.user_id).name%></a>
 
+<div id="vote_control">
+	<form action="/questionvotes" method="post">
+		<input type="hidden" name="question_id" value="<%=@question.id%>">
+		<input class="user_button" type="submit" value="Upvote">
+	</form>
+
+	<form action="/questionvotes/<%=@user.id%>" method="post">
+		<input type="hidden" name="_method" value="delete">
+		<input class="user_button" type="submit" value="Downvote">
+	</form>
+</div>
+
 	<br>
 
 
