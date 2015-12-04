@@ -3,23 +3,36 @@
 	by <a href="/users/<%=@user.id%>"><%=User.find(@question.user_id).name%></a>
 
 <div id="vote_control">
-	<form action="/questionvotes" method="post">
-		<input type="hidden" name="question_id" value="<%=@question.id%>">
+
+	<%if !@user.questionvotes.find_by(question_id: @question.id).nil?%>
+
+		<form action="/questionvotes" method="post">
+			<input type="submit" value="Upvote <%=Questionvote.where(question_id: @question.id).count%>">
+		</form>
+
+	<%else%>
+		<form action="/questionvotes/<%=@user.questionvotes.find_by(question_id: @question.id)%>" method="post">
+			<input type="hidden" name="_method" value="patch">
+			<input class="user_button" type="submit" value="Upvote  <%=Questionvote.where(question_id: @question.id).count%>" >
+		</form>
+
+	<%end%>
+
+
+
+
+	<form action="/questionvotes/<%=@user.questionvotes.find_by(question_id: @question.id)%>" method="post">
+		<input type="hidden" name="_method" value="patch">
 		<input class="user_button" type="submit" value="Upvote  <%=Questionvote.where(question_id: @question.id).count%>" >
 	</form>
 
-	<%if !@user.questionvotes.find_by(question_id: @question.id).nil? %>
 	<form action="/questionvotes/<%=@user.questionvotes.find_by(question_id: @question.id).id%>" method="post">
 		<input type="hidden" name="_method" value="delete">
 		<input class="user_button" type="submit" value="Downvote">
 	</form>
-	<%end%>
-	
 </div>
 
-
-	<br>
-
+<br><br>
 
 <%if @question.user_id.to_i == current_user.id%>
 
@@ -41,7 +54,7 @@
 	</form>
 <%end%>
 
-
+<h3>Answer</h3>
 <div class="post">
 	<%Answer.where(question_id: @question.id).each do |answer|%>
 		<%=answer.content%><br>

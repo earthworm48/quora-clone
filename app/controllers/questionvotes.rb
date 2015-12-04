@@ -1,11 +1,20 @@
-
-# Create new upvotes
-post '/questionvotes' do
-	questionvote = Questionvote.create(user_id: current_user.id, question_id: params[:question_id])
-	
-
+# Create new upvtes
+post '/questionvotes/upvote' do
+	questionvote = Questionvote.create(user_id: current_user.id, question_id: params[:question_id],)	
 	redirect "/questions/#{questionvote.question_id}"
 end
+
+
+# Update to upvote
+patch "/questionvotes/:questionvotes_id" do
+	questionvote = Questionvote.find(params[:questionvotes_id])
+	questionvote.update(type: true)
+	redirect "/questions/#{questionvote.question_id}"
+end
+
+
+
+
 
 # Delete votes & Downvote!
 delete "/questionvotes/:questionvotes_id" do
