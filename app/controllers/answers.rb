@@ -2,7 +2,6 @@
 # Create new answers
 post '/answers' do
 	@answer = Answer.create(content: params[:content],user_id: session[:user_id],question_id: params[:question_id])	
-	# byebug
 	redirect "/questions/#{@answer.question_id}"
 end
 
@@ -25,8 +24,8 @@ patch "/answers/:answer_id" do
 end
 
 delete "/answers/:answer_id" do
-	question = Question.find(params[:answer_id])
+	answer = Answer.find(params[:answer_id])
 	# byebug
-	question.destroy
-	redirect "/users/#{session[:user_id]}" 	
+	answer.destroy
+	redirect "/questions/#{answer.question_id}" 	
 end
