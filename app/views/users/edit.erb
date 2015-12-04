@@ -5,15 +5,27 @@
 	<input type="hidden" name="_method" value="patch" >
 	
 	<label>Name: </label>
-	<input type="text" name="name" value="<%=@user.name%>"><br>
+	<input type="text" name="name" value="<%=@user.name%>"><br>	
 	
 	<label>Email: </label>
 	<input type="text" name="email" value="<%=@user.email%>"><br>
 	
-	<label>Password: </label>
-	<input type="password" name="password"><br>
+	<label>Current Password: </label>
+	<input type="password" name="current_password"><br>
+
+	<label>New Password: </label>
+	<input type="password" name="new_password"><br>
 
 	<label>Description: </label>
 	<input type="text" name="description" value="<%=@user.description%>"><br>
 	<input type="submit" value="Update Profile">
 </form>
+
+<div class="error">
+	<% if @user.errors.any?%>
+		<% for message_error in @user.errors.full_messages %>
+			<p><%=message_error %> </p>
+		<%end%>
+		</div>
+	<%end%>
+</div>

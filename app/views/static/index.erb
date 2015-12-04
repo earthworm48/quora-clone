@@ -3,7 +3,7 @@
 	<h1 id="logo"> Quora </h1>
 	<h3>The best answer to any question</h3>
 
-	<div id="error">
+	<div class="error">
 		<%= @error if @error %>
 
 		<% if @user.errors.any?%>
@@ -13,7 +13,7 @@
 			<%end%>
 			</div>
 		<%end%>
-		</div>
+	</div>
 	</center>
 	
 	<center>

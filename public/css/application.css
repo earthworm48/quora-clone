@@ -28,7 +28,7 @@
 	display:table-cell;
 }
 
-#error{
+.error{
 	color: red;
 	font: sans-serif;
 	font-weight: bold;

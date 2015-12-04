@@ -59,9 +59,18 @@ end
 
 # Update user
 patch "/users/:id" do
-	user = User.find(params[:id])
-	user.update(name: params[:name], email: params[:email], password: params[:password], description: params[:description])
-	redirect "/users/#{user.id}"
+	@user = User.find(params[:id])
+	@user.update(name: params[:name], email: params[:email], description: params[:description])
+
+	if @user.authenticate(params[:current_password])	
+		@user.update(password: params[:new_password])
+		redirect "/users/#{@user.id}"
+	end
+	if @user.save		
+		redirect "/users/#{@user.id}"
+	else
+		erb :"users/edit"
+	end		
 end
 
 delete "/users/:id" do
