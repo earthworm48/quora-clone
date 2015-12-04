@@ -1,18 +1,44 @@
 # Create new upvtes
 post '/questionvotes/upvote' do
-	questionvote = Questionvote.create(user_id: current_user.id, question_id: params[:question_id],)	
+
+	questionvote = Questionvote.create(user_id: current_user.id, question_id: params[:question_id], pattern: true)	
+	
 	redirect "/questions/#{questionvote.question_id}"
 end
 
+# Update for upvote
+patch "/questionvotes/:questionvotes_id/upvote" do
 
-# Update to upvote
-patch "/questionvotes/:questionvotes_id" do
 	questionvote = Questionvote.find(params[:questionvotes_id])
-	questionvote.update(type: true)
+	
+	if questionvote.pattern == true
+		questionvote.update(pattern: nil)
+	else
+		questionvote.update(pattern: true)
+	end
 	redirect "/questions/#{questionvote.question_id}"
 end
 
+# Create new downvotes
+post '/questionvotes/downvote' do
 
+	questionvote = Questionvote.create(user_id: current_user.id, question_id: params[:question_id], pattern: false)	
+	
+	redirect "/questions/#{questionvote.question_id}"
+end
+
+# Update for downvote
+patch "/questionvotes/:questionvotes_id/downvote" do
+
+	questionvote = Questionvote.find(params[:questionvotes_id])
+	
+	if questionvote.pattern == false
+		questionvote.update(pattern: nil)
+	else
+		questionvote.update(pattern: false)
+	end
+	redirect "/questions/#{questionvote.question_id}"
+end
 
 
 

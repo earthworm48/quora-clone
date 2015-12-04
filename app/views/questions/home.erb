@@ -4,33 +4,48 @@
 
 <div id="vote_control">
 
-	<%if !@user.questionvotes.find_by(question_id: @question.id).nil?%>
+	<%if @user.questionvotes.find_by(question_id: @question.id).nil?%>
 
-		<form action="/questionvotes" method="post">
-			<input type="submit" value="Upvote <%=Questionvote.where(question_id: @question.id).count%>">
+		<form action="/questionvotes/upvote" method="post">
+			<input type="hidden" name="question_id" value= "<%= @question.id%>" >
+			<input type="submit" value="Upvote <%=Questionvote.where(question_id: @question.id, pattern: true).count%>">
 		</form>
 
 	<%else%>
-		<form action="/questionvotes/<%=@user.questionvotes.find_by(question_id: @question.id)%>" method="post">
+		<form action="/questionvotes/<%=@user.questionvotes.find_by(question_id: @question.id).id%>/upvote" method="post">
 			<input type="hidden" name="_method" value="patch">
-			<input class="user_button" type="submit" value="Upvote  <%=Questionvote.where(question_id: @question.id).count%>" >
+			<input type="hidden" name="questionvote_id" value= "<%= @question.id%>" >
+			<% if @user.questionvotes.find_by(question_id: @question.id).pattern == true%>
+			<input class="user_button" type="submit" value="Upvoted  <%=Questionvote.where(question_id: @question.id, pattern: true).count%>" >
+			<%else%>
+				<input class="user_button" type="submit" value="Upvote  <%=Questionvote.where(question_id: @question.id, pattern: true).count%>" >
+			<%end%>
 		</form>
 
 	<%end%>
 
-
-
-
-	<form action="/questionvotes/<%=@user.questionvotes.find_by(question_id: @question.id)%>" method="post">
-		<input type="hidden" name="_method" value="patch">
-		<input class="user_button" type="submit" value="Upvote  <%=Questionvote.where(question_id: @question.id).count%>" >
-	</form>
-
-	<form action="/questionvotes/<%=@user.questionvotes.find_by(question_id: @question.id).id%>" method="post">
-		<input type="hidden" name="_method" value="delete">
-		<input class="user_button" type="submit" value="Downvote">
-	</form>
 </div>
+
+	<%if @user.questionvotes.find_by(question_id: @question.id).nil?%>
+
+		<form action="/questionvotes/downvote" method="post">
+			<input type="hidden" name="question_id" value= "<%= @question.id%>" >
+			<input type="submit" value="Downvote">
+		</form>
+
+	<%else%>
+		<form action="/questionvotes/<%=@user.questionvotes.find_by(question_id: @question.id).id%>/downvote" method="post">
+			<input type="hidden" name="_method" value="patch">
+			<input type="hidden" name="questionvote_id" value= "<%= @question.id%>" >
+			<% if @user.questionvotes.find_by(question_id: @question.id).pattern == false%>
+				<input class="user_button" type="submit" value="Downvoted" >
+			<%else%>
+				<input class="user_button" type="submit" value="Downvote" >
+			<%end%>
+		</form>
+
+	<%end%>
+
 
 <br><br>
 
