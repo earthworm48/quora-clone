@@ -1,20 +1,15 @@
 
-
+# Create new answers
 post '/answers' do
 	@answer = Answer.create(content: params[:content],user_id: session[:user_id],question_id: params[:question_id])	
 	# byebug
 	redirect "/questions/#{@answer.question_id}"
 end
 
-
-
-
-
-
+# Display all answers
 get '/answers' do
 	erb :"answers/all"
 end
-
 
 # Edit question
 get '/answers/:answer_id/edit' do
