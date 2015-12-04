@@ -5,9 +5,10 @@
 
 	<nav id="menu">
 	  <% if session[:user_id]%>
-  	  	  <a href="/users/<%=session[:user_id]%>"><%=User.find(session[:user_id]).name%></a> |
-	  	  <a href="/questions/new">Write Question</a> |
-	  	  <a href="/questions">All Question</a> |
+  	  	  <a href="/questions">Top Stories</a> |
+
+	  	  <a href="/questions/new">Ask Question</a> |
+	  	  <a href="/users/<%=session[:user_id]%>"><%=User.find(session[:user_id]).name%></a> |
 	  	  <a href="/users/:id/logout">Log Out</a> |   
 	  <% end %>
 	</nav>

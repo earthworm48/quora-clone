@@ -29,7 +29,7 @@ Description: <%= @user.description%><br>
 	<% @user.questions.each do |question|%>
 		<a class="profile_post" href="/questions/<%=question.id%>"><%=question.title%></a><br>
 		<%if Answer.find_by(question_id: question.id) != nil %>
-			<%=Answer.find_by(question_id: question.id).content%>
+			<%=Answer.find_by(question_id: question.id).content%><br>
 		<%end%>
 	<%end%>
 <%else%>

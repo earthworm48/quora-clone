@@ -4,13 +4,7 @@
 
 	<br>
 
-	<div class="post">
-		<%Answer.where(question_id: @question.id).each do |answer|%>
-			<%=answer.content%><br>
-		<%end%>
-	</div>
 
-<br><br>
 <%if @question.user_id == session[:user_id]%>
 
 	<a href="/questions/<%=@question.id%>/edit"><button>Edit Your Question</button></a>
@@ -19,6 +13,7 @@
 		<input type="hidden" name="_method" value="delete">
 		<input type="submit" value="Delete Your Questions">
 	</form>
+
 
 <%else%>
 
@@ -31,3 +26,11 @@
 
 <%end%>
 
+
+<div class="post">
+	<%Answer.where(question_id: @question.id).each do |answer|%>
+		<%=answer.content%><br>
+	<%end%>
+</div>
+
+<br><br>
