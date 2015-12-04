@@ -8,11 +8,15 @@
 		<input class="user_button" type="submit" value="Upvote  <%=Questionvote.where(question_id: @question.id).count%>" >
 	</form>
 
+	<%if !@user.questionvotes.find_by(question_id: @question.id).nil? %>
 	<form action="/questionvotes/<%=@user.questionvotes.find_by(question_id: @question.id).id%>" method="post">
 		<input type="hidden" name="_method" value="delete">
 		<input class="user_button" type="submit" value="Downvote">
 	</form>
+	<%end%>
+	
 </div>
+
 
 	<br>
 
