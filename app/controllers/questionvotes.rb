@@ -1,9 +1,8 @@
 
 # Create new upvotes
 post '/questionvotes' do
-	Questionvote.create(user_id: current_user.id, question_id: params[:question_id])
-	byebug
-	redirect '/questions/#{params[:question_id]}'
+	questionvote = Questionvote.create(user_id: current_user.id, question_id: params[:question_id])
+	redirect "/questions/#{questionvote.question_id}"
 end
 
 # Delete votes & Downvote!
