@@ -2,15 +2,16 @@
 # Create new upvotes
 post '/questionvotes' do
 	questionvote = Questionvote.create(user_id: current_user.id, question_id: params[:question_id])
+	
+
 	redirect "/questions/#{questionvote.question_id}"
 end
 
 # Delete votes & Downvote!
 delete "/questionvotes/:questionvotes_id" do
-	question = Question.find(params[:questionvotes_id])
-	# byebug
-	question.destroy
-	redirect "/users/#{session[:user_id]}" 	
+	questionvote = Questionvote.find(params[:questionvotes_id])
+	questionvote.destroy
+	redirect "/questions/#{questionvote.question_id}" 	
 end
 
 post '/questionvotes' do

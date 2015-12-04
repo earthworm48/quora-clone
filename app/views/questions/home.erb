@@ -8,7 +8,7 @@
 		<input class="user_button" type="submit" value="Upvote  <%=Questionvote.where(question_id: @question.id).count%>" >
 	</form>
 
-	<form action="/questionvotes/<%=@user.id%>" method="post">
+	<form action="/questionvotes/<%=@user.questionvotes.find_by(question_id: @question.id).id%>" method="post">
 		<input type="hidden" name="_method" value="delete">
 		<input class="user_button" type="submit" value="Downvote">
 	</form>
