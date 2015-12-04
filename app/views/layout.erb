@@ -4,7 +4,7 @@
 <script type="text/javascript" src="/js/application.js"></script>
 
 	<nav id="menu">
-	  <% if session[:user_id]%>
+	  <% if logged_in?%>
   	  	  <a href="/questions">Top Stories</a> |
 
 	  	  <a href="/questions/new">Ask Question</a> |

@@ -9,7 +9,7 @@ Email: <%= @user.email%><br>
 Description: <%= @user.description%><br>
 
 <div id="user_control">
-<%if session[:user_id] == @user.id%>
+<%if current_user.id == @user.id%>
 	<a href="/users/<%=@user.id%>/edit"><button class="user_button">Edit</button></a>
 
 	<form action="/users/<%=@user.id%>" method="post">
