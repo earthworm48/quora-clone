@@ -5,7 +5,7 @@
 <div id="vote_control">
 	<form action="/questionvotes" method="post">
 		<input type="hidden" name="question_id" value="<%=@question.id%>">
-		<input class="user_button" type="submit" value="Upvote">
+		<input class="user_button" type="submit" value="Upvote  <%=Questionvote.where(question_id: @question.id).count%>" >
 	</form>
 
 	<form action="/questionvotes/<%=@user.id%>" method="post">
