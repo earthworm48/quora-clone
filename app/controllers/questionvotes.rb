@@ -1,9 +1,14 @@
 # Create new upvtes
-post '/questionvotes/upvote' do
-
-	questionvote = Questionvote.create(user_id: current_user.id, question_id: params[:question_id], pattern: true)	
+post '/questions/:question_id/upvote' do
+	question = Question.find(params[:question_id])
+	questionvote = question.questionvotes.create(user_id: current_user.id, pattern: true)	
 	
-	redirect "/questions/#{questionvote.question_id}"
+
+	
+	@question_id = questionvote.question_id
+	@questionvotes_count =  Questionvote.where(question_id: @question_id).count
+	{questionvotes: @questionvotes_count, question_id: @question_id}.to_json
+	# redirect "/questions/#{questionvote.question_id}"
 end
 
 # Update for upvote
@@ -16,7 +21,14 @@ patch "/questionvotes/:questionvotes_id/upvote" do
 	else
 		questionvote.update(pattern: true)
 	end
-	redirect "/questions/#{questionvote.question_id}"
+
+	if params[:location] == "top_stories"
+
+
+		redirect "/questions"
+	else
+		redirect "/questions/#{questionvote.question_id}"
+	end
 end
 
 # Create new downvotes
@@ -37,7 +49,13 @@ patch "/questionvotes/:questionvotes_id/downvote" do
 	else
 		questionvote.update(pattern: false)
 	end
-	redirect "/questions/#{questionvote.question_id}"
+
+	if params[:location] == "top_stories"
+		redirect "/questions"
+	else
+		redirect "/questions/#{questionvote.question_id}"
+	end
+
 end
 
 

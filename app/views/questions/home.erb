@@ -1,30 +1,21 @@
 	
 	<h2><%=@question.title%></h2>	
-	by <a href="/users/<%=@user.id%>"><%=User.find(@question.user_id).name%></a>
+	by <a href="/users/<%=@user.id%>"><%=@question.user.name%></a>
 
 <div id="vote_control">
 
-	<%if @user.questionvotes.find_by(question_id: @question.id).nil?%>
+<% if @question.questionvotes %>
 
-		<form action="/questionvotes/upvote" method="post">
-			<input type="hidden" name="question_id" value= "<%= @question.id%>" >
-			<input type="submit" value="Upvote <%=Questionvote.where(question_id: @question.id, pattern: true).count%>">
+		<form id="target" action="/questionvotes/upvote" method="post">
+			<input id="question_id" type="hidden" name="question_id" value= "<%= @question.id%>" >
+			<input type="submit" value="Upvote <%=@question.questionvotes.where(pattern: true).count%>">
 		</form>
+<%end%>
 
-	<%else%>
-		<form action="/questionvotes/<%=@user.questionvotes.find_by(question_id: @question.id).id%>/upvote" method="post">
-			<input type="hidden" name="_method" value="patch">
-			<input type="hidden" name="questionvote_id" value= "<%= @question.id%>" >
-			<% if @user.questionvotes.find_by(question_id: @question.id).pattern == true%>
-			<input class="user_button" type="submit" value="Upvoted  <%=Questionvote.where(question_id: @question.id, pattern: true).count%>" >
-			<%else%>
-				<input class="user_button" type="submit" value="Upvote  <%=Questionvote.where(question_id: @question.id, pattern: true).count%>" >
-			<%end%>
-		</form>
+	
 
-	<%end%>
 
-</div>
+
 
 	<%if @user.questionvotes.find_by(question_id: @question.id).nil?%>
 
@@ -36,6 +27,7 @@
 	<%else%>
 		<form action="/questionvotes/<%=@user.questionvotes.find_by(question_id: @question.id).id%>/downvote" method="post">
 			<input type="hidden" name="_method" value="patch">
+			<input id="question_id" type="hidden" name="question_id" value= "<%= @question.id%>" >
 			<input type="hidden" name="questionvote_id" value= "<%= @question.id%>" >
 			<% if @user.questionvotes.find_by(question_id: @question.id).pattern == false%>
 				<input class="user_button" type="submit" value="Downvoted" >
@@ -45,7 +37,7 @@
 		</form>
 
 	<%end%>
-
+</div>
 
 <br><br>
 

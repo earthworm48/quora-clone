@@ -13,6 +13,7 @@ end
 get '/questions/:question_id' do
 	@user = User.find(session[:user_id])
 	@question = Question.find(params[:question_id])
+	
 	erb :"questions/home"
 end
 
