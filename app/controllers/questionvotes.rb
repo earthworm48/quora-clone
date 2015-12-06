@@ -1,23 +1,58 @@
 # Create new upvotes
 post '/questions/:question_id/upvote' do
-	question = Question.find(params[:question_id])			
-	@question_id = questionvote.question_id
+# byebug	
+	@question_id = params[:question_id]
+	question = Question.find(@question_id)	
+	questionvote = question.questionvotes.new(user_id: current_user.id, pattern: true)	
 
-	questionvote = question.questionvotes.create(user_id: current_user.id)
-
-	if questionvotes.find_by(user_id: current_user.id).nil?
-		question.questionvotes.find_by(user_id: current_user.id).update(pattern: nil)		
-	else
-		questionvote = question.questionvotes.create(user_id: current_user.id, pattern: true)
+	if !questionvote.save
+		questionvote = question.questionvotes.find_by(user_id: current_user)
+		if questionvote[:pattern] != true
+			questionvote.update(pattern: true)
+		else
+			questionvote.update(pattern: nil)
+		end
 	end
-	
-	@questionvotes_count =  Questionvote.where(question_id: @question_id).count
-	{questionvotes: @questionvotes_count, question_id: @question_id}.to_json	
-end	
 
+	if questionvote[:pattern] != true
+		name_upvote = ""
+	else
+		name_upvote = "d"
+	end
+	# byebug
+	name_downvote = ""
 
+	@questionvotes_count =  Questionvote.where(question_id: @question_id).where(pattern: true).count
+	{questionvotes: @questionvotes_count, question_id: @question_id, name_upvote: name_upvote, name_downvote: name_downvote}.to_json
+end
 
+# Create new downvotes
+post '/questions/:question_id/downvote' do	
+	@question_id = params[:question_id]
+	question = Question.find(@question_id)	
+	questionvote = question.questionvotes.new(user_id: current_user.id, pattern: false)	
 
+	if !questionvote.save
+		questionvote = question.questionvotes.find_by(user_id: current_user)
+		if questionvote[:pattern] != false
+			questionvote.update(pattern: false)
+
+		else
+			questionvote.update(pattern: nil)
+		end
+	end
+
+	if questionvote[:pattern] != false
+		name_downvote = ""
+	else
+		name_downvote = "d"
+	end
+
+	name_upvote = ""
+
+	@questionvotes_count =  Questionvote.where(question_id: @question_id).where(pattern: true).count
+	{questionvotes: @questionvotes_count, question_id: @question_id, name_upvote: name_upvote, name_downvote: name_downvote}.to_json
+end
 
 # Update for upvote
 patch "/questionvotes/:questionvotes_id/upvote" do

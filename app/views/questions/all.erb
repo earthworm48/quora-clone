@@ -8,50 +8,10 @@
 			by <a href="/users/<%=question.user_id%>"><%=question.user.name%></a><br>
 
 				<div id="vote_control">
-				
-				<button type="button" class="upvote-button" id="upvote-button-<%=question.id %>"  data-vote-url="/questions/<%= question.id %>/upvote">Upvote <%=question.questionvotes.count%></button>
 
+				<button type="button" class="upvote-button" id="upvote-button-<%=question.id %>"  data-vote-url="/questions/<%= question.id %>/upvote">Upvote <%=question.questionvotes.where(pattern: true).count%></button>
 
-
-
-			<!-- 	<%if current_user.questionvotes.find_by(question_id: question.id).nil?%>
-
-	
-				<%else%>
-					<form id = "target"  action="/questionvotes/<%=current_user.questionvotes.find_by(question_id: question.id).id%>/upvote" method="post">
-						<input type="hidden" name="_method" value="patch">
-						<input type="hidden" name="location" value= "top_stories">
-						<input type="hidden" id="question_id" value= "<%= question.id%>" >
-						<input type="hidden" name="questionvote_id" value= "<%= question.id%>" >
-						<% if current_user.questionvotes.find_by(question_id: question.id).pattern == true%>
-						<input class="user_button" type="submit" value="Upvoted  <%=Questionvote.where(question_id: question.id, pattern: true).count%>" >
-						<%else%>
-							<input class="user_button" type="submit" value="Upvote  <%=Questionvote.where(question_id: question.id, pattern: true).count%>" >
-						<%end%>
-					</form>
-
-				<%end%> -->
-
-				<%if current_user.questionvotes.find_by(question_id: question.id).nil?%>
-
-					<form action="/questionvotes/downvote" method="post">
-						<input type="hidden" name="location" value= "top_stories">
-						<input type="hidden" name="question_id" value= "<%= question.id%>" >
-						<input type="submit" value="Downvote">
-					</form>
-
-				<%else%>
-					<form action="/questionvotes/<%=current_user.questionvotes.find_by(question_id: question.id).id%>/downvote" method="post">
-						<input type="hidden" name="_method" value="patch">
-						<input type="hidden" name="location" value= "top_stories">
-						<input type="hidden" name="questionvote_id" value= "<%= question.id%>" >
-						<% if current_user.questionvotes.find_by(question_id: question.id).pattern == false%>
-							<input class="user_button" type="submit" value="Downvoted" >
-						<%else%>
-							<input class="user_button" type="submit" value="Downvote" >
-						<%end%>
-					</form>
-				<%end%>
+				<button type="button" class="downvote-button" id="downvote-button-<%=question.id %>"  data-vote-url="/questions/<%= question.id %>/downvote">Downvote </button>
 
 			</div>
 			<br><br>

@@ -3,5 +3,4 @@ class Question < ActiveRecord::Base
 	has_many :questionvotes
 
 	validates :title, presence: true
-	acts_as_votable
 end

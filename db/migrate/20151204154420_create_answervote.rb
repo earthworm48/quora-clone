@@ -1,6 +1,6 @@
 class CreateAnswervote < ActiveRecord::Migration
 	def change
-		create_table :questionvotes do |t|
+		create_table :answervotes do |t|
 			t.string :user_id
 			t.string :answer_id
 			t.boolean :pattern
