@@ -7,19 +7,17 @@ post '/questions/:question_id/upvote' do
 
 	if !questionvote.save
 		questionvote = question.questionvotes.find_by(user_id: current_user)
-		if questionvote[:pattern] != true
-			questionvote.update(pattern: true)
+		if questionvote[:pattern] == true
+			questionvote.destroy
+			name_upvote = ""
 		else
-			questionvote.update(pattern: nil)
+			questionvote.update(pattern: true)
+			name_upvote = "d"
 		end
-	end
-
-	if questionvote[:pattern] != true
-		name_upvote = ""
 	else
 		name_upvote = "d"
 	end
-	# byebug
+
 	name_downvote = ""
 
 	@questionvotes_count =  Questionvote.where(question_id: @question_id).where(pattern: true).count
@@ -32,24 +30,22 @@ post '/questions/:question_id/downvote' do
 	question = Question.find(@question_id)	
 	questionvote = question.questionvotes.new(user_id: current_user.id, pattern: false)	
 
-	if !questionvote.save
+	if !questionvote.save 
 		questionvote = question.questionvotes.find_by(user_id: current_user)
-		if questionvote[:pattern] != false
-			questionvote.update(pattern: false)
-
+		if questionvote[:pattern] == false
+			questionvote.destroy
+			name_downvote = ""
 		else
-			questionvote.update(pattern: nil)
-		end
-	end
-
-	if questionvote[:pattern] != false
-		name_downvote = ""
+			# byebug
+			questionvote.update(pattern: false)
+			name_downvote = "d"
+		end 
 	else
 		name_downvote = "d"
 	end
 
 	name_upvote = ""
-
+	# byebug
 	@questionvotes_count =  Questionvote.where(question_id: @question_id).where(pattern: true).count
 	{questionvotes: @questionvotes_count, question_id: @question_id, name_upvote: name_upvote, name_downvote: name_downvote}.to_json
 end
