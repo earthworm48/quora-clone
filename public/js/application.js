@@ -10,11 +10,11 @@ $(document).ready(function(){
 	           success: function(response)
 	           {	
 	           		
-	               $('#upvote-button-' + response.question_id).html("Upvote " + response.questionvotes); // show response from the php script.		
+	               $('#upvote-button-' + response.question_id).html("Upvote " + response.questionvotes);		
  
 	           },
-	           error: function(xhr,response){
-            		console.log("Error code is "+xhr.status+" and the error is "+response);
+	           error: function(response){
+            		.;
         		}
 	         });
 	})

@@ -4,11 +4,12 @@
 
 	<%Question.all.each do |question|%>
 		<div class="post_all">
-			<h2><a href="/questions/<%=question.id%>"><%=question.title%></a></h2><br>
+			<h2><a href="/questions/<%=question.id%>"><%=question.title%></a></h2>
 			by <a href="/users/<%=question.user_id%>"><%=question.user.name%></a><br>
 
 				<div id="vote_control">
-				<button type="button" class="upvote-button" id="upvote-button-<%=question.id %>"  data-vote-url="/questions/<%= question.id %>/upvote">Upvote</button>
+				
+				<button type="button" class="upvote-button" id="upvote-button-<%=question.id %>"  data-vote-url="/questions/<%= question.id %>/upvote">Upvote <%=question.questionvotes.count%></button>
 
 
 

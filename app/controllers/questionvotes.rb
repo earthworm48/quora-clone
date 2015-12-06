@@ -1,15 +1,23 @@
-# Create new upvtes
+# Create new upvotes
 post '/questions/:question_id/upvote' do
-	question = Question.find(params[:question_id])
-	questionvote = question.questionvotes.create(user_id: current_user.id, pattern: true)	
-	
-
-	
+	question = Question.find(params[:question_id])			
 	@question_id = questionvote.question_id
+
+	questionvote = question.questionvotes.create(user_id: current_user.id)
+
+	if questionvotes.find_by(user_id: current_user.id).nil?
+		question.questionvotes.find_by(user_id: current_user.id).update(pattern: nil)		
+	else
+		questionvote = question.questionvotes.create(user_id: current_user.id, pattern: true)
+	end
+	
 	@questionvotes_count =  Questionvote.where(question_id: @question_id).count
-	{questionvotes: @questionvotes_count, question_id: @question_id}.to_json
-	# redirect "/questions/#{questionvote.question_id}"
-end
+	{questionvotes: @questionvotes_count, question_id: @question_id}.to_json	
+end	
+
+
+
+
 
 # Update for upvote
 patch "/questionvotes/:questionvotes_id/upvote" do
