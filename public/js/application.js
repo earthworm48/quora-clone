@@ -67,7 +67,34 @@ $(document).ready(function(){
  
 	           },
 	         });
+
 	})
+
+
+
+	// $("#myBtn").click(function(){
+ //        $("#myModal").modal();
+ //    });
+
+	// $(function() {
+ //    $( "#dialog" ).dialog({
+ //      autoOpen: false,
+ //      show: {
+ //        effect: "blind",
+ //        duration: 1000
+ //      },
+ //      hide: {
+ //        effect: "explode",
+ //        duration: 1000
+ //      }
+ //    });
+
+ //    $( ".opener" ).click(function() {
+ //    	alert("hi");
+ //      $( "#dialog" ).dialog( "open" );
+ //    });
+ //  });
+	
 	// $("#target").submit(function(e){
 	// 	e.preventDefault();
 

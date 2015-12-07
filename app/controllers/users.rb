@@ -27,6 +27,14 @@ post '/users/login' do
 	end
 end
 
+get '/users/login' do
+  @user = User.new
+  if params[:error_msg]
+  	@error = params[:error_msg]
+  end
+  erb :"static/index"
+end
+
 # user profile page
 get '/users/:id' do
 	# byebug

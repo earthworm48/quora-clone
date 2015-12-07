@@ -42,7 +42,7 @@ Description: <%= @user.description%><br>
 	<h3><%= @user.name%> answer this:</h3><br>
 
 	<% @user.answers.each do |answer|%>
-<%byebug%>
+
 		<a class="profile_post" href="/questions/<%=answer.question_id%>"><%=answer.question.title%></a><br>
 		<%=answer.content%><br>
 	<%end%>

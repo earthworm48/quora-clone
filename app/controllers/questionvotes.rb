@@ -2,7 +2,21 @@
 post '/questions/:question_id/upvote' do
 # byebug	
 	@question_id = params[:question_id]
-	question = Question.find(@question_id)	
+	question = Question.find(@question_id)
+
+	# upvote = question.questionvotes.find_or_initialize_by(user_id: current_user.id)
+	
+	# if !upvote.id.nil? && upvote.pattern == false
+	# 	upvote.pattern = true
+	# 	upvote.save
+	# elsif !upvote.id.nil?
+	# 	upvote.save
+	# else
+	# 	upvote.destroy
+	# end
+
+
+
 	questionvote = question.questionvotes.new(user_id: current_user.id, pattern: true)	
 
 	if !questionvote.save
@@ -22,6 +36,9 @@ post '/questions/:question_id/upvote' do
 
 	@questionvotes_count =  Questionvote.where(question_id: @question_id).where(pattern: true).count
 	{questionvotes: @questionvotes_count, question_id: @question_id, name_upvote: name_upvote, name_downvote: name_downvote}.to_json
+
+
+
 end
 
 # Create new downvotes
