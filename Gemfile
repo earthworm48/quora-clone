@@ -25,6 +25,7 @@ gem 'rake'
 gem 'rspec'
 gem 'bcrypt'
 gem 'acts_as_votable'
+gem 'faker'
 
 group :development, :test do
 	# Adding shotgun for local web hosting

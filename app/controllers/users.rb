@@ -14,13 +14,13 @@ end
 # user login
 post '/users/login' do
 	@user = User.find_by(email: params[:email]) 
-	# byebug
 	if @user.nil?
 		@error = "No such email address"
 		redirect "/?error_msg=#{@error}"
 	elsif @user.authenticate(params[:password])	
 		session[:user_id] = @user.id
-		redirect "/users/#{@user.id}"
+		redirect "/questions"
+
 	else
 		@error = "Wrong combination of e-mail and password"
 		redirect "/?error_msg=#{@error}"

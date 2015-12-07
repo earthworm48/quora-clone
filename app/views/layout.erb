@@ -30,13 +30,12 @@
 		  	  	  <li><a href="/questions">Top Stories</a></li>
 
 			  	  <li><a href="/questions/new">Ask Question</a></li>
-
 			  	  <% if logged_in?%>
 			  	  	<li><a href="/users/:id/logout">Log Out</a></li>
 			  	  	<li class="active"><a href="/users/<%=session[:user_id]%>"><%=User.find(session[:user_id]).name%></a></li> 
 			  	  <%else%>
 				  	  <li class="active"><a href="#">Guest</a></li>
-				  	  <li><a href="/users/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				  	  <li><a href="#" data-toggle = "modal" data-target = "#myModal"><span  class="glyphicon glyphicon-log-in" ></span> Login</a></li>
 				  	  <li><a href="/users/login"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 			  	  <% end %>
 			  	</ul>   
