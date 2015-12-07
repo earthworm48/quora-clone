@@ -24,7 +24,7 @@
 
 		<%if Answer.find_by(question_id: question.id)%>
 		
-			<div class="panel-body"><%=Answer.find_by(question_id: question.id).content%><br>
+			<div class="panel-body truncated_answer_content"><%=Answer.find_by(question_id: question.id).content%><br>
 			</div> <!--- panel-body -->
 			
 		<%end%>

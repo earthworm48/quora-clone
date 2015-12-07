@@ -80,3 +80,10 @@ a {
 a:hover{
 	text-decoration: underline;
 }
+
+/*.truncate {
+  width: 700px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}*/
