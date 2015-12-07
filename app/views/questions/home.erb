@@ -3,9 +3,9 @@
 
 	<div id="vote_control">
 
-				<span><button type="button" class="upvote-button" id="upvote-button-<%=@question.id %>"  data-vote-url="/questions/<%= @question.id %>/upvote">Upvote <%=@question.questionvotes.where(pattern: true).count%></button></span>
+		<span><button type="button" class="upvote-button" id="upvote-button-<%=@question.id %>"  data-vote-url="/questions/<%= @question.id %>/upvote">Upvote <%=@question.questionvotes.where(pattern: true).count%></button></span>
 
-				<span><button type="button" class="downvote-button" id="downvote-button-<%=@question.id %>"  data-vote-url="/questions/<%= @question.id %>/downvote">Downvote </button></span>
+		<span><button type="button" class="downvote-button" id="downvote-button-<%=@question.id %>"  data-vote-url="/questions/<%= @question.id %>/downvote">Downvote </button></span>
 
 	</div>
 

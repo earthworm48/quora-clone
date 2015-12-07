@@ -22,6 +22,9 @@ require 'erb'
 require 'uri'
 require 'byebug'
 require 'faker'
+
+require 'will_paginate'
+require 'will_paginate/active_record'
 ######################################################################
 
 
