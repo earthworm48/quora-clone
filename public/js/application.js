@@ -9,7 +9,7 @@ $(document).ready(function(){
 
         $(this).html(
             t.slice(0,minimize_character_count )+'<span>... </span><a href="#" class="more">(More)</a>'+
-            '<span style="display:none;">'+ t.slice(minimize_character_count ,t.length)+' <a href="#" class="less">Less</a></span>'
+            '<span style="display:none;">'+ t.slice(minimize_character_count ,t.length)+' <a href="#" class="less">(Less)</a></span>'
         );
 
     }); 
