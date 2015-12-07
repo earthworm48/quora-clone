@@ -1,8 +1,8 @@
 
 # Create new answers
 post '/answers' do
-	@answer = Answer.create(content: params[:content],user_id: session[:user_id],question_id: params[:question_id])	
-	redirect "/questions/#{@answer.question_id}"
+	@answer = Answer.create(content: params[:content], user_id: session[:user_id],question_id: params[:question_id])		
+	redirect "questions/#{@answer.question_id}"
 end
 
 # Display all answers

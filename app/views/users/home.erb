@@ -24,12 +24,14 @@ Description: <%= @user.description%><br>
 <div class="line-separator"></div>
 
 <% if @user.questions.any?%>
+
 	<h3><%= @user.name%> asked this:</h3>
 
 	<% @user.questions.each do |question|%>
 		<a class="profile_post" href="/questions/<%=question.id%>"><%=question.title%></a><br>
-		<%if Answer.find_by(question_id: question.id) != nil %>
-			<%=Answer.find_by(question_id: question.id).content%><br>
+		<%if question.answers.count != 0 %>
+
+			<%= Answer.find_by(question_id: question.id).content %><br>
 		<%end%>
 	<%end%>
 <%else%>
@@ -40,8 +42,8 @@ Description: <%= @user.description%><br>
 	<h3><%= @user.name%> answer this:</h3><br>
 
 	<% @user.answers.each do |answer|%>
-
-		<a class="profile_post" href="/questions/<%=answer.question_id%>"><%=Question.find(answer.question_id).title%></a><br>
+<%byebug%>
+		<a class="profile_post" href="/questions/<%=answer.question_id%>"><%=answer.question.title%></a><br>
 		<%=answer.content%><br>
 	<%end%>
 <%else%>

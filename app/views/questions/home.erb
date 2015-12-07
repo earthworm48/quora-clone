@@ -2,44 +2,13 @@
 	<h2><%=@question.title%></h2>	
 	by <a href="/users/<%=@user.id%>"><%=@question.user.name%></a>
 
-<div id="vote_control">
+	<div id="vote_control">
 
-<% if @question.questionvotes %>
+				<button type="button" class="upvote-button" id="upvote-button-<%=@question.id %>"  data-vote-url="/questions/<%= @question.id %>/upvote">Upvote <%=@question.questionvotes.where(pattern: true).count%></button>
 
-		<form id="target" action="/questionvotes/upvote" method="post">
-			<input id="question_id" type="hidden" name="question_id" value= "<%= @question.id%>" >
-			<input type="submit" value="Upvote <%=@question.questionvotes.where(pattern: true).count%>">
-		</form>
-<%end%>
+				<button type="button" class="downvote-button" id="downvote-button-<%=@question.id %>"  data-vote-url="/questions/<%= @question.id %>/downvote">Downvote </button>
 
-	
-
-
-
-
-	<%if @user.questionvotes.find_by(question_id: @question.id).nil?%>
-
-		<form action="/questionvotes/downvote" method="post">
-			<input type="hidden" name="question_id" value= "<%= @question.id%>" >
-			<input type="submit" value="Downvote">
-		</form>
-
-	<%else%>
-		<form action="/questionvotes/<%=@user.questionvotes.find_by(question_id: @question.id).id%>/downvote" method="post">
-			<input type="hidden" name="_method" value="patch">
-			<input id="question_id" type="hidden" name="question_id" value= "<%= @question.id%>" >
-			<input type="hidden" name="questionvote_id" value= "<%= @question.id%>" >
-			<% if @user.questionvotes.find_by(question_id: @question.id).pattern == false%>
-				<input class="user_button" type="submit" value="Downvoted" >
-			<%else%>
-				<input class="user_button" type="submit" value="Downvote" >
-			<%end%>
-		</form>
-
-	<%end%>
-</div>
-
-<br><br>
+	</div>
 
 <%if @question.user_id.to_i == current_user.id%>
 
@@ -53,24 +22,33 @@
 
 <%else%>
 
-	<form action="/answers" method="POST">
-		<label>Answer The Questions </label><br>
-		<textarea name="content" required></textarea><br>
-		<input type="hidden" name="question_id" value= <%=@question.id%> >
+	<form id="target" action="/answers" method="POST">
+		<label>Answer The Questions</label>
+		<input type="text" name="content" required>
+		<input type="hidden" name="question_id" value="<%=@question.id%>">
 		<input type="submit" value="Post Your Answer!">
 	</form>
+
 <%end%>
 
+
 <h3>Answer</h3>
-<div class="post">
-	<%Answer.where(question_id: @question.id).each do |answer|%>
-		<%=answer.content%><br>
+<div class="answer-container">
+	<div class="answer-each"><%Answer.where(question_id: @question.id).each do |answer|%>
+		<%=answer.content%></div>
+
+		<div id="vote_control">
+			<button type="button" class="upvote-button-answer" id="upvote-button-answer-<%=answer.id %>"  data-vote-url="/answers/<%= answer.id %>/upvote">Upvote <%=answer.answervotes.where(pattern: true).count%></button>
+
+			<button type="button" class="downvote-button-answer" id="downvote-button-answer-<%=answer.id %>"  data-vote-url="/answers/<%= answer.id %>/downvote">Downvote </button>
+
+		</div>
 
 		<%if answer.user_id.to_i == current_user.id%>
 
 			<a href="/answers/<%=answer.id%>/edit"><button>Edit Your Answer</button></a>
 
-			<form action="/answers/<%=answer.id%>" method="post">
+			<form  action="/answers/<%=answer.id%>" method="post">
 				<input type="hidden" name="_method" value="delete">
 				<input type="submit" value="Delete Your Answer">
 			</form>

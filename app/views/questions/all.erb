@@ -7,7 +7,22 @@
 			<h2><a href="/questions/<%=question.id%>"><%=question.title%></a></h2>
 			by <a href="/users/<%=question.user_id%>"><%=question.user.name%></a><br>
 
-				<div id="vote_control">
+			<%if question.user_id.to_i == current_user.id%>
+
+				<a href="/questions/<%=question.id%>/edit"><button>Edit Your Question</button></a>
+
+				<form action="/questions/<%=question.id%>" method="post">
+					<input type="hidden" name="_method" value="delete">
+					<input type="submit" value="Delete Your Questions">
+				</form>
+
+			<%else%>
+
+				<a href="/questions/<%=question.id%>"><button>Post Your Answer!</button></a>			
+			<%end%>	
+			
+
+			<div id="vote_control">
 
 				<button type="button" class="upvote-button" id="upvote-button-<%=question.id %>"  data-vote-url="/questions/<%= question.id %>/upvote">Upvote <%=question.questionvotes.where(pattern: true).count%></button>
 
