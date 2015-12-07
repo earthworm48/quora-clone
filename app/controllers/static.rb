@@ -3,5 +3,5 @@ get '/' do
   if params[:error_msg]
   	@error = params[:error_msg]
   end
-  erb :"static/index"
+  erb :"questions/all"
 end
